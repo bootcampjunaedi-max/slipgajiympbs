@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1E4D36">
+  <title>Slip Gaji Terpusat — YASMA PB. Soedirman</title>
+  <meta name="description" content="Portal slip gaji terpusat YASMA PB. Soedirman — lihat slip gaji Anda dengan aman.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E4D36'/%3E%3Cpath d='M32 12 12 22v4h40v-4L32 12Zm-14 18v16h6V30h-6Zm11 0v16h6V30h-6Zm11 0v16h6V30h-6ZM12 50v4h40v-4H12Z' fill='%23E2B65B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script>
+    // Terapkan tema sebelum render (anti-kedip). Data awal (boot) diambil dari API GAS oleh js/app.js.
+    (function () { try { var t = localStorage.getItem('sg_theme'); if (t) document.documentElement.setAttribute('data-theme', t.replace(/"/g, '')); } catch (e) { } })();
+  </script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Lewati ke konten</a>
+
+<!-- ═════════════ LAYAR LOGIN ═════════════ -->
+<div id="view-login" class="login-wrap" hidden>
+  <div class="login-art" aria-hidden="true">
+    <div class="pattern"></div>
+    <div class="login-art-inner">
+      <div class="brand-mark lg"><i class="bi bi-bank2"></i></div>
+      <p class="eyebrow gold" data-bind="singkatan">YASMA PB. SOEDIRMAN</p>
+      <h1>Slip Gaji Terpusat</h1>
+      <p class="lead-soft">Satu alur kerja untuk menerbitkan, mengirim, dan mengarsipkan slip gaji 7 unit (6 sekolah + Non Pendidikan) — rahasia untuk setiap pegawai.</p>
+      <ul class="feature-list">
+        <li><i class="bi bi-shield-lock"></i> Akses per peran, diperiksa di server</li>
+        <li><i class="bi bi-whatsapp"></i> Notifikasi WhatsApp + tautan pribadi ke akun pegawai</li>
+        <li><i class="bi bi-folder2-open"></i> Arsip Excel & PDF rapi di Drive privat</li>
+      </ul>
+    </div>
+  </div>
+  <div class="login-panel">
+    <div class="login-card">
+      <div class="d-flex align-items-center gap-2 mb-4 d-lg-none">
+        <div class="brand-mark"><i class="bi bi-bank2"></i></div>
+        <div><p class="eyebrow gold mb-0" data-bind="singkatan">YASMA PB. SOEDIRMAN</p><strong>Portal Slip Gaji</strong></div>
+      </div>
+      <h2 class="h4 fw-bold mb-1">Masuk ke Portal</h2>
+      <p class="text-muted-2 mb-4">Gunakan NRP/ID dan kata sandi, akun Google Workspace yayasan, atau buka tautan pribadi dari pesan WhatsApp Bendahara.</p>
+      <div id="linkNote" hidden></div>
+      <div id="setupWarn" class="alert-soft danger mb-3" hidden></div>
+      <form id="loginForm" novalidate>
+        <div class="mb-3">
+          <label for="loginId" class="form-label">NRP / ID Akun</label>
+          <div class="input-icon"><i class="bi bi-person-badge"></i>
+            <input id="loginId" class="form-control" autocomplete="username" inputmode="text" required placeholder="mis. 1985031201">
+          </div>
+        </div>
+        <div class="mb-2">
+          <label for="loginPass" class="form-label">Kata Sandi</label>
+          <div class="input-icon"><i class="bi bi-key"></i>
+            <input id="loginPass" type="password" class="form-control" autocomplete="current-password" required>
+            <button type="button" class="btn-eye" data-toggle-pass="loginPass" aria-label="Tampilkan kata sandi"><i class="bi bi-eye"></i></button>
+          </div>
+        </div>
+        <div id="loginErr" class="field-error mb-2" role="alert"></div>
+        <button id="loginBtn" type="submit" class="btn btn-primary-app w-100 mt-2">
+          <i class="bi bi-box-arrow-in-right"></i> Masuk
+        </button>
+      </form>
+      <div class="divider-text" id="googleDivider" hidden><span>atau</span></div>
+      <div id="googleWrap" hidden>
+        <div id="gsiBtn" class="gsi-btn"></div>
+        <button id="googleBtn" type="button" class="btn btn-ghost w-100" hidden><i class="bi bi-google"></i> Masuk dengan Akun Google Yayasan</button>
+      </div>
+      <p class="tiny text-muted-2 mt-4 mb-0"><i class="bi bi-info-circle"></i> Lupa kata sandi? Hubungi Tata Usaha unit Anda untuk reset. 5x salah sandi akan mengunci akun 15 menit.</p>
+    </div>
+    <p class="tiny text-center text-muted-2 mt-3"><i class="bi bi-shield-check"></i> Dilindungi kebijakan kerahasiaan gaji · UU PDP No. 27/2022</p>
+  </div>
+</div>
+
+<!-- ═════════════ APLIKASI ═════════════ -->
+<div id="view-app" class="app" hidden>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar" aria-label="Navigasi utama">
+    <div class="sidebar-brand">
+      <div class="brand-mark"><i class="bi bi-bank2"></i></div>
+      <div class="min-w-0">
+        <div class="brand-title" data-bind="singkatan">YASMA PB. SOEDIRMAN</div>
+        <div class="brand-sub" id="brandSub">Slip Gaji Terpusat</div>
+      </div>
+    </div>
+    <div id="portalTag" class="portal-tag" hidden></div>
+    <nav><ul id="navMain" class="nav-list"></ul></nav>
+    <div class="sidebar-foot">
+      <ul id="navFoot" class="nav-list"></ul>
+      <div class="sidebar-meta"><span>v2.0</span><span>GAS REST API</span></div>
+    </div>
+  </aside>
+  <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
+
+  <div class="app-main">
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="icon-btn d-lg-none" id="menuBtn" aria-label="Buka menu"><i class="bi bi-list"></i></button>
+      <div class="topbar-chips">
+        <span class="chip chip-outline" id="chipPeriode"><i class="bi bi-calendar3"></i> <span>PERIODE: -</span></span>
+        <span class="chip chip-success d-none d-md-inline-flex" id="chipAktif"><span class="dot"></span> <span>AKTIF</span></span>
+        <span class="chip chip-gold d-none d-md-inline-flex" id="chipRole"></span>
+        <span class="chip chip-warn d-none" id="chipUji" title="Mode Uji aktif: semua surel dikirim ke pemilik skrip"><i class="bi bi-cone-striped"></i> MODE UJI</span>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="themeBtn" aria-label="Ganti tema terang/gelap"><i class="bi bi-moon-stars"></i></button>
+        <button class="icon-btn" id="refreshBtn" aria-label="Segarkan data"><i class="bi bi-arrow-clockwise"></i></button>
+        <div class="dropdown">
+          <button class="user-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" id="userAvatar">A</span>
+            <span class="d-none d-sm-flex flex-column text-start lh-sm">
+              <strong id="userName">-</strong><small id="userRoleText">-</small>
+            </span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li><a class="dropdown-item" href="javascript:void(0)" data-nav="keamanan"><i class="bi bi-shield-lock"></i> Keamanan & Sandi</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="javascript:void(0)" data-action="logout"><i class="bi bi-box-arrow-right"></i> Keluar Sesi</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div id="netBar" class="net-bar" hidden><span class="spinner-inline"></span> <span id="netText">Menyinkronkan…</span></div>
+
+    <main id="main" class="content" tabindex="-1">
+
+      <!-- W-03 DASBOR YAYASAN -->
+      <section id="section-dashboard" class="content-section" data-title="Dasbor Yayasan">
+        <div id="dashAlert"></div>
+        <div class="kpi-grid" id="dashKpi"></div>
+        <div class="row g-3 mt-1">
+          <div class="col-xl-7"><div class="card-app h-100">
+            <div class="card-head"><div><p class="eyebrow">// Statistik Unit</p><h3>Distribusi Slip Terkirim per Unit</h3></div>
+              <select id="dashPeriodSel" class="form-select form-select-sm w-auto" aria-label="Pilih periode"></select></div>
+            <div class="chart-box"><canvas id="chartUnit"></canvas></div>
+          </div></div>
+          <div class="col-xl-5"><div class="card-app h-100">
+            <div class="card-head"><div><p class="eyebrow">// Proporsional Budget</p><h3>Alokasi Anggaran Payroll per Unit</h3></div></div>
+            <div class="chart-box donut"><canvas id="chartDonut"></canvas><div class="donut-center" id="donutCenter"></div></div>
+            <div class="legend-grid" id="donutLegend"></div>
+          </div></div>
+        </div>
+        <div class="row g-3 mt-1">
+          <div class="col-xl-8"><div class="card-app h-100">
+            <div class="card-head"><div><p class="eyebrow">// Tren Historis</p><h3>Tren Pengiriman Slip 12 Bulan Terakhir</h3></div><span class="chip chip-success" id="trendAvg"></span></div>
+            <div class="chart-box"><canvas id="chartTrend"></canvas></div>
+          </div></div>
+          <div class="col-xl-4"><div class="insight-card h-100">
+            <p class="eyebrow gold"><i class="bi bi-stars"></i> Insight Otomatis</p>
+            <h3>Analisis Siklus Payroll</h3>
+            <ul id="insightList"></ul>
+          </div></div>
+        </div>
+        <div class="card-app mt-3">
+          <div class="card-head"><div><p class="eyebrow">// Arsip Buku Besar</p><h3>Pengiriman Terbaru & Status Siklus</h3></div>
+            <div class="search-box"><i class="bi bi-search"></i><input id="dashSearch" class="form-control form-control-sm" placeholder="Cari ID periode…" aria-label="Cari periode"></div></div>
+          <div class="table-responsive"><table class="table-app" id="dashTable"></table></div>
+        </div>
+      </section>
+
+      <!-- W-04 UNGGAH REKAP -->
+      <section id="section-upload" class="content-section" data-title="Unggah Rekap Gaji">
+        <div class="stepper" data-step="1"></div>
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-04 // TAHAP 1 SIKLUS PAYROLL</span> PARSER: SHEETJS (BROWSER) → GAS</p>
+            <h1>Unggah Rekap Gaji</h1>
+            <p class="text-muted-2">Unggah file Excel master rekap gaji untuk diurai dan divalidasi ke 7 unit (6 sekolah + Non Pendidikan).</p></div>
+        </div>
+        <div class="tpl-banner">
+          <div class="tpl-icon"><i class="bi bi-file-earmark-spreadsheet"></i></div>
+          <div class="flex-grow-1"><strong>Templat Master Resmi</strong><div class="small text-muted-2">Templat berisi seluruh pegawai aktif (NRP, nama, unit, email) — tinggal isi nominal. Kolom komponen dapat ditambah sesuai Pengaturan.</div></div>
+          <button class="btn btn-ghost btn-sm" data-action="downloadTemplate"><i class="bi bi-download"></i> Unduh Templat (.xlsx)</button>
+        </div>
+        <div class="card-app mt-3">
+          <h3 class="mb-3"><i class="bi bi-sliders"></i> Parameter Pembayaran Gaji</h3>
+          <div class="row g-3">
+            <div class="col-md-4"><label class="form-label" for="upBulan">Bulan Gaji <span class="req">*</span></label><select id="upBulan" class="form-select"></select></div>
+            <div class="col-md-4"><label class="form-label" for="upTahun">Tahun <span class="req">*</span></label><select id="upTahun" class="form-select"></select></div>
+            <div class="col-md-4"><label class="form-label" for="upJenis">Jenis Pembayaran <span class="req">*</span></label>
+              <select id="upJenis" class="form-select"><option value="BULANAN">Gaji Reguler</option><option value="THR">Gaji THR</option><option value="BONUS">Gaji Bonus 13</option><option value="REVISI">Revisi Gaji Reguler</option></select></div>
+          </div>
+          <div id="upPeriodHint" class="small mt-2"></div>
+        </div>
+        <label class="dropzone mt-3" id="dropzone" for="fileInput">
+          <span class="dz-meta"><span>L01 // PARSER-SHEETJS</span><span>MAKS: 25 MB</span></span>
+          <span class="dz-icon"><i class="bi bi-file-earmark-arrow-up"></i></span>
+          <strong class="fs-5">Tarik dan letakkan berkas Excel rekap gaji di sini</strong>
+          <span class="text-muted-2">Format .xlsx atau .xls (sheet pertama dibaca)</span>
+          <span class="btn btn-primary-app mt-2"><i class="bi bi-search"></i> Telusuri Dokumen Komputer</span>
+          <input type="file" id="fileInput" accept=".xlsx,.xls" hidden>
+        </label>
+        <div id="uploadResult"></div>
+        <div class="card-app mt-3">
+          <p class="eyebrow mb-2">Alur Pemrosesan Siklus Payroll</p>
+          <div class="flow-grid" id="flowGrid"></div>
+        </div>
+        <div class="sticky-actions">
+          <button class="btn btn-ghost" data-action="resetUpload"><i class="bi bi-arrow-counterclockwise"></i> Reset Formulir</button>
+          <span class="tiny mono text-muted-2 d-none d-md-inline" id="upDocId"></span>
+          <button class="btn btn-primary-app ms-auto" id="toPreviewBtn" data-nav="preview" disabled>Lanjut ke Pratinjau Data (W-05) <i class="bi bi-arrow-right"></i></button>
+        </div>
+      </section>
+
+      <!-- W-05 PRATINJAU & KIRIM -->
+      <section id="section-preview" class="content-section" data-title="Pratinjau & Kirim">
+        <div class="stepper" data-step="2"></div>
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-05 // TAHAP 2 VALIDASI SEBELUM DISPATCH</span> <span id="pvPeriodLabel"></span></p>
+            <h1>Pratinjau & Validasi Rekap Gaji</h1>
+            <p class="text-muted-2">Verifikasi data, pilih metode kirim (Email / WhatsApp), lalu slip diterbitkan: surel berisi PDF, WhatsApp berisi pemberitahuan + tautan pribadi ke akun pegawai.</p></div>
+          <select id="pvPeriodSel" class="form-select w-auto" aria-label="Pilih periode"></select>
+        </div>
+        <div class="kpi-grid" id="pvKpi"></div>
+        <div id="pvBanner"></div>
+        <div id="pvMetode"></div>
+        <div class="card-app mt-3 p-2">
+          <div class="filter-bar">
+            <div class="search-box grow"><i class="bi bi-search"></i><input id="pvSearch" class="form-control" placeholder="Cari nama, NRP, surel, atau No. WA…" aria-label="Cari"></div>
+            <select id="pvUnit" class="form-select" aria-label="Filter unit"></select>
+            <select id="pvStatus" class="form-select" aria-label="Filter status"><option value="">Semua Status</option><option value="VALID">Valid</option><option value="KRITIS">Anomali Kritis</option><option value="RINGAN">Anomali Ringan</option><option value="Terkirim">Sudah Terkirim</option><option value="Gagal">Gagal Kirim</option></select>
+            <label class="check-pill"><input type="checkbox" id="pvHide"> Sembunyikan anomali</label>
+            <button class="btn btn-ghost" data-action="exportValidasi"><i class="bi bi-download"></i> Ekspor (.csv)</button>
+          </div>
+        </div>
+        <div class="card-app mt-2 p-0"><div class="table-responsive"><table class="table-app" id="pvTable"></table></div><div class="pager" id="pvPager"></div></div>
+        <div class="sticky-actions">
+          <button class="btn btn-ghost" data-nav="upload"><i class="bi bi-arrow-left"></i> Kembali ke Unggah</button>
+          <button class="btn btn-ghost text-danger" data-action="deleteDraft" id="pvDeleteBtn"><i class="bi bi-trash3"></i> Hapus Draft</button>
+          <button class="btn btn-primary-app ms-auto" data-action="confirmDispatch" id="pvSendBtn"><i class="bi bi-send"></i> <span>Kirim Slip</span></button>
+        </div>
+      </section>
+
+      <!-- W-06 PROGRESS -->
+      <section id="section-progress" class="content-section" data-title="Progress Pengiriman">
+        <div class="stepper" data-step="3"></div>
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-06 // LIVE BATCH WORKER</span> GOOGLE APPS SCRIPT ENGINE</p>
+            <h1>Monitoring Pengiriman Massal</h1>
+            <p class="text-muted-2">Pembuatan PDF arsip, surel, dan notifikasi WhatsApp berlangsung bertahap; dilanjutkan pemicu waktu tiap menit bila browser ditutup.</p></div>
+          <div class="runtime-box" id="runtimeBox"></div>
+        </div>
+        <div id="progEmpty"></div>
+        <div id="progBody">
+          <div class="row g-3">
+            <div class="col-lg-6"><div class="card-app h-100" id="progWorker"></div></div>
+            <div class="col-lg-6"><div class="card-app h-100" id="progQuota"></div></div>
+          </div>
+          <div class="card-app mt-3" id="progAgg"></div>
+          <div class="row g-3 mt-1">
+            <div class="col-xl-6"><div class="console">
+              <div class="console-head"><span class="dots"><i></i><i></i><i></i></span><span>yasma-engine://dispatch.log</span><button class="console-copy" data-action="copyLog"><i class="bi bi-copy"></i> Salin</button></div>
+              <div class="console-body" id="consoleBody" aria-live="polite"></div>
+            </div></div>
+            <div class="col-xl-6"><div class="card-app h-100"><div class="card-head"><h3>Progress per Unit</h3><span class="tiny text-muted-2" id="unitProgSum"></span></div><div class="unit-grid" id="unitProg"></div></div></div>
+          </div>
+          <div id="progFailures"></div>
+        </div>
+        <div class="sticky-actions" id="progActions"></div>
+      </section>
+
+      <!-- W-07 DATA PEGAWAI -->
+      <section id="section-pegawai" class="content-section" data-title="Data Pegawai">
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-07 // MASTER DATA</span> SUMBER KEBENARAN NRP</p><h1 id="pegTitle">Data Pegawai</h1>
+            <p class="text-muted-2" id="pegSub">Kelola guru dan tenaga kependidikan seluruh unit. Penghapusan berupa nonaktif agar riwayat slip tetap utuh.</p></div>
+          <div class="d-flex gap-2 flex-wrap align-items-start">
+          <div class="dropdown">
+            <button class="btn btn-ghost dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i> Unduh Data</button>
+            <ul class="dropdown-menu shadow-sm">
+              <li><a class="dropdown-item" href="javascript:void(0)" data-action="pegExport" data-id="xlsx"><i class="bi bi-file-earmark-excel"></i><span><b>Excel (.xlsx)</b><br><small class="text-muted-2">Per unit atau seluruh unit · bisa difilter &amp; diolah</small></span></a></li>
+              <li><a class="dropdown-item" href="javascript:void(0)" data-action="pegExport" data-id="pdf"><i class="bi bi-file-earmark-pdf"></i><span><b>PDF</b><br><small class="text-muted-2">Siap cetak A4 mendatar · lengkap dengan kop</small></span></a></li>
+            </ul>
+          </div>
+          <div class="d-flex gap-2 flex-wrap admin-only">
+            <div class="dropdown">
+              <button class="btn btn-ghost dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-file-earmark-spreadsheet"></i> Templat Impor</button>
+              <ul class="dropdown-menu shadow-sm">
+                <li><a class="dropdown-item" href="javascript:void(0)" data-action="pegTemplate" data-id="blank"><i class="bi bi-file-earmark-plus"></i><span><b>Templat kosong</b><br><small class="text-muted-2">Untuk menambah pegawai baru (berisi contoh & petunjuk)</small></span></a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" data-action="pegTemplate" data-id="data"><i class="bi bi-file-earmark-ruled"></i><span><b>Templat + data pegawai saat ini</b><br><small class="text-muted-2">Untuk ubah data massal lalu impor kembali</small></span></a></li>
+              </ul>
+            </div>
+            <label class="btn btn-ghost mb-0"><i class="bi bi-file-earmark-arrow-up"></i> Impor Excel<input type="file" id="importPegInput" accept=".xlsx,.xls" hidden></label>
+            <div class="dropdown">
+              <button class="btn btn-danger-soft dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-trash3"></i> Hapus Data</button>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                <li><a class="dropdown-item" href="javascript:void(0)" data-action="deletePegUnit"><i class="bi bi-building-dash"></i><span><b>Hapus pegawai per unit…</b><br><small class="text-muted-2">Seluruh pegawai di satu unit sekolah</small></span></a></li>
+                <li><a class="dropdown-item text-danger" href="javascript:void(0)" data-action="deletePegAll"><i class="bi bi-exclamation-octagon"></i><span><b>Hapus SEMUA pegawai…</b><br><small class="text-muted-2">Kosongkan master data (mis. sebelum impor ulang)</small></span></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><span class="dropdown-item-text tiny text-muted-2 px-3 d-block" style="max-width:300px">Hapus per orang: tombol <i class="bi bi-trash3"></i> di kolom Aksi.</span></li>
+              </ul>
+            </div>
+            <button class="btn btn-primary-app" data-action="addPegawai"><i class="bi bi-person-plus"></i> Tambah Pegawai</button>
+          </div>
+          </div>
+        </div>
+        <div class="kpi-grid small-kpi" id="pegKpi"></div>
+        <div class="card-app mt-3 p-2"><div class="filter-bar">
+          <div class="search-box grow"><i class="bi bi-search"></i><input id="pegSearch" class="form-control" placeholder="Cari NRP, nama, email…" aria-label="Cari pegawai"></div>
+          <select id="pegUnit" class="form-select" aria-label="Filter unit"></select>
+          <select id="pegStatus" class="form-select" aria-label="Filter status"><option value="">Semua Status</option><option>Aktif</option><option>Nonaktif</option></select>
+          <button class="btn btn-ghost admin-only" data-action="sendCredBulk"><i class="bi bi-envelope-at"></i> Kirim Kredensial</button>
+        </div></div>
+        <div class="card-app mt-2 p-0"><div class="table-responsive"><table class="table-app" id="pegTable"></table></div><div class="pager" id="pegPager"></div></div>
+      </section>
+
+      <!-- W-09 RIWAYAT + LOG AUDIT -->
+      <section id="section-riwayat" class="content-section" data-title="Riwayat Pengiriman">
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-09 // RIWAYAT TRANSMISI & LOG AUDIT</span> <span id="rwScope"></span></p><h1>Riwayat Pengiriman & Log Audit</h1>
+            <p class="text-muted-2">Histori transmisi slip gaji dan jejak autentikasi, unduhan, serta penguncian akun.</p></div>
+          <div class="d-flex gap-2"><button class="btn btn-ghost" data-action="exportRiwayat"><i class="bi bi-download"></i> Ekspor (.csv)</button></div>
+        </div>
+        <div class="kpi-grid" id="rwKpi"></div>
+        <div class="tabs-app mt-3" role="tablist">
+          <button role="tab" class="tab active" data-tab="rw-trans"><i class="bi bi-envelope"></i> Riwayat Transmisi Slip</button>
+          <button role="tab" class="tab" data-tab="rw-audit"><i class="bi bi-shield-check"></i> Log Audit & Keamanan Akun <span class="badge-gold" id="auditAlertCount">0</span></button>
+        </div>
+        <div class="tab-pane-app active" id="rw-trans">
+          <div class="card-app mt-2 p-2"><div class="filter-bar">
+            <select id="rwPeriode" class="form-select" aria-label="Periode"></select>
+            <select id="rwUnit" class="form-select" aria-label="Unit"></select>
+            <select id="rwStatus" class="form-select" aria-label="Status"><option value="">Semua Status Kirim</option><option>Terkirim</option><option>Gagal</option><option>Menunggu</option><option>Draft</option></select>
+            <div class="search-box grow"><i class="bi bi-search"></i><input id="rwSearch" class="form-control" placeholder="Cari NRP atau nama…" aria-label="Cari"></div>
+            <label class="check-pill"><input type="checkbox" id="rwProblem"> Hanya bermasalah</label>
+          </div></div>
+          <div class="card-app mt-2 p-0"><div class="table-responsive"><table class="table-app" id="rwTable"></table></div><div class="pager" id="rwPager"></div></div>
+        </div>
+        <div class="tab-pane-app" id="rw-audit">
+          <div id="lockIncidents" class="mt-2"></div>
+          <div class="card-app mt-2 p-2"><div class="filter-bar">
+            <div class="search-box grow"><i class="bi bi-search"></i><input id="auSearch" class="form-control" placeholder="Cari NRP, nama, aksi, ID log…" aria-label="Cari log"></div>
+            <select id="auKategori" class="form-select" aria-label="Kategori"><option value="">Semua Kategori</option></select>
+            <select id="auTingkat" class="form-select" aria-label="Tingkat"><option value="">Semua Tingkat</option><option>Kritis</option><option>Peringatan</option><option>Info</option></select>
+            <button class="btn btn-ghost" data-action="reloadAudit"><i class="bi bi-arrow-clockwise"></i> Segarkan Log</button>
+          </div></div>
+          <div class="card-app mt-2 p-0"><div class="table-responsive"><table class="table-app" id="auTable"></table></div><div class="pager" id="auPager"></div></div>
+        </div>
+      </section>
+
+      <!-- W-10 KELOLA AKUN -->
+      <section id="section-akun" class="content-section" data-title="Kelola Akun & RBAC">
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-10 // AKUN & RBAC</span> HAK AKSES DIPERIKSA DI SERVER</p><h1>Kelola Akun & Hak Akses</h1>
+            <p class="text-muted-2">Akun Admin Yayasan & Admin Sekolah, status penguncian, dan reset kata sandi.</p></div>
+          <button class="btn btn-primary-app" data-action="addAkun"><i class="bi bi-person-gear"></i> Tambah Akun Admin</button>
+        </div>
+        <div class="card-app"><h3 class="mb-3">Matriks Hak Akses</h3><div class="table-responsive"><table class="table-app compact" id="rbacTable"></table></div></div>
+        <div class="card-app mt-3 p-2"><div class="filter-bar">
+          <div class="search-box grow"><i class="bi bi-search"></i><input id="akSearch" class="form-control" placeholder="Cari ID, nama, email…" aria-label="Cari akun"></div>
+          <select id="akPeran" class="form-select" aria-label="Peran"><option value="">Semua Peran</option><option value="AdminYayasan">Admin Yayasan</option><option value="AdminSekolah">Admin Sekolah</option><option value="Pegawai">Pegawai</option></select>
+          <select id="akKondisi" class="form-select" aria-label="Kondisi"><option value="">Semua Kondisi</option><option value="kunci">Terkunci</option><option value="wajib">Wajib Ganti Sandi</option><option value="nonaktif">Nonaktif</option></select>
+        </div></div>
+        <div class="card-app mt-2 p-0"><div class="table-responsive"><table class="table-app" id="akTable"></table></div><div class="pager" id="akPager"></div></div>
+      </section>
+
+      <!-- W-11 MONITORING UNIT / DASBOR UNIT -->
+      <section id="section-monitoring" class="content-section" data-title="Monitoring Unit">
+        <div class="page-head">
+          <div><p class="eyebrow"><span class="tag">W-11 // DASBOR UNIT SEKOLAH</span> <span id="monScope"></span></p><h1 id="monTitle">Dasbor Pemantauan Slip Gaji Unit</h1>
+            <p class="text-muted-2">Pemantauan distribusi slip, akses portal, dan kendala yang perlu ditindaklanjuti.</p></div>
+          <div class="d-flex gap-2 flex-wrap"><select id="monUnit" class="form-select w-auto" aria-label="Unit"></select><select id="monPeriode" class="form-select w-auto" aria-label="Periode"></select></div>
+        </div>
+        <div class="policy-card" id="monPolicy" hidden>
+          <i class="bi bi-shield-fill-check"></i>
+          <div><strong>KEBIJAKAN ZERO-SALARY & ISOLASI DATA UNIT</strong>
+            <p class="mb-0">Admin Sekolah hanya melihat status pengiriman dan bantuan kendala teknis. Seluruh nominal gaji, tunjangan, dan potongan tidak pernah dikirim ke perangkat Anda — dibatasi di server.</p>
+            <div class="d-flex gap-2 flex-wrap mt-2"><span class="chip chip-dark"><i class="bi bi-building"></i> ISOLASI: <b id="monIsoUnit">-</b></span><span class="chip chip-dark"><i class="bi bi-eye-slash"></i> NOMINAL: DITIADAKAN</span></div></div>
+        </div>
+        <div class="kpi-grid mt-3" id="monKpi"></div>
+        <div class="row g-3 mt-1">
+          <div class="col-xl-7"><div class="card-app h-100"><div class="card-head"><div><h3>Tren Distribusi Slip 6 Bulan Terakhir</h3><p class="small text-muted-2 mb-0">Persentase transmisi sukses per periode</p></div></div><div id="monTrend" class="hbar-list"></div></div></div>
+          <div class="col-xl-5"><div class="card-app h-100"><div class="card-head"><h3>Status Penerimaan Periode Ini</h3></div><div class="chart-box donut sm"><canvas id="chartMon"></canvas><div class="donut-center" id="monDonutCenter"></div></div><div class="legend-grid" id="monLegend"></div></div></div>
+        </div>
+        <div id="monActions" class="mt-3"></div>
+        <div class="card-app mt-3 p-0"><div class="table-responsive"><table class="table-app" id="monTable"></table></div><div class="pager" id="monPager"></div></div>
+      </section>
+
+      <!-- W-12 PORTAL PEGAWAI / SLIP SAYA -->
+      <section id="section-portal" class="content-section" data-title="Slip Saya">
+        <div id="portalAdminPick" class="card-app mb-3" hidden>
+          <div class="d-flex flex-wrap gap-2 align-items-end">
+            <div class="flex-grow-1"><label class="form-label" for="portalPeg">Lihat slip pegawai (Admin Yayasan)</label>
+              <input id="portalPeg" class="form-control" list="portalPegList" placeholder="Ketik NRP atau nama…"><datalist id="portalPegList"></datalist></div>
+          </div>
+        </div>
+        <div id="portalBody"></div>
+      </section>
+
+      <!-- W-02 KEAMANAN / GANTI SANDI -->
+      <section id="section-keamanan" class="content-section" data-title="Keamanan & Kata Sandi">
+        <div class="narrow">
+          <div id="mustChangeNote"></div>
+          <div class="card-app" id="pwIdentity"></div>
+          <div class="d-flex justify-content-between align-items-start mt-4 mb-2">
+            <div><h2 class="h5 fw-bold mb-0">Atur Kredensial Baru</h2><p class="small text-muted-2 mb-0">Kombinasi kata sandi portal & PIN unduh slip</p></div>
+            <span class="chip chip-outline mono">W-02</span>
+          </div>
+          <form id="pwForm" novalidate autocomplete="off">
+            <div class="card-app mb-3" id="oldPassWrap">
+              <label class="form-label" for="pwOld"><i class="bi bi-person-check"></i> Kata Sandi Saat Ini <span class="tiny text-muted-2">(verifikasi)</span></label>
+              <div class="input-icon"><i class="bi bi-lock"></i><input type="password" id="pwOld" class="form-control" autocomplete="current-password">
+                <button type="button" class="btn-eye" data-toggle-pass="pwOld" aria-label="Tampilkan kata sandi saat ini"><i class="bi bi-eye"></i></button></div>
+              <div class="tiny text-muted-2 mt-1">Wajib diisi untuk mengganti kata sandi maupun PIN.</div>
+            </div>
+            <div class="card-app mb-3" id="pwCard">
+              <div class="d-flex justify-content-between gap-2"><label class="form-label" for="pwNew"><i class="bi bi-key"></i> Kata Sandi Baru Portal <span class="tiny text-muted-2" id="pwOptional"></span></label><span class="chip chip-outline tiny" id="pwStrengthTag">-</span></div>
+              <div class="input-icon"><i class="bi bi-key"></i><input type="password" id="pwNew" class="form-control" autocomplete="new-password">
+                <button type="button" class="btn-eye" data-toggle-pass="pwNew" aria-label="Tampilkan kata sandi baru"><i class="bi bi-eye"></i></button></div>
+              <div class="strength"><span id="pwBar"></span></div>
+              <div class="pw-rules" id="pwRules">
+                <span data-rule="len"><i class="bi bi-circle"></i> Min. 8 karakter</span><span data-rule="case"><i class="bi bi-circle"></i> Huruf besar & kecil</span>
+                <span data-rule="num"><i class="bi bi-circle"></i> Mengandung angka</span><span data-rule="sym"><i class="bi bi-circle"></i> Simbol unik (@#$) — disarankan</span>
+              </div>
+              <div class="d-flex justify-content-between mt-3"><label class="form-label" for="pwConfirm">Ulangi Kata Sandi Baru</label><span class="tiny fw-semibold" id="pwMatch"></span></div>
+              <div class="input-icon"><i class="bi bi-key"></i><input type="password" id="pwConfirm" class="form-control" autocomplete="new-password"></div>
+            </div>
+            <div class="card-app mb-3" id="pinCard">
+              <div class="d-flex justify-content-between align-items-start gap-2">
+                <div><span class="form-label d-block mb-0"><i class="bi bi-file-earmark-lock"></i> PIN Dokumen 6 Digit <span class="tiny text-muted-2" id="pinOptional"></span></span>
+                  <span class="small text-muted-2">Untuk membuka unduhan PDF slip gaji di portal.</span></div>
+                <button type="button" class="btn btn-ghost btn-xs flex-shrink-0" id="pinShow" aria-pressed="false"><i class="bi bi-eye"></i> <span>Tampilkan</span></button>
+              </div>
+              <div class="pin-label mt-3"><span>PIN baru</span><span id="pinState1" class="tiny"></span></div>
+              <div class="pin-boxes" id="pinBoxes" role="group" aria-label="PIN baru, 6 digit angka"></div>
+              <div class="pin-label mt-3"><span>Ulangi PIN</span><span id="pinState2" class="tiny"></span></div>
+              <div class="pin-boxes" id="pinBoxes2" role="group" aria-label="Ulangi PIN, 6 digit angka"></div>
+              <div class="alert-soft warn mt-3 tiny" id="pinHint"><i class="bi bi-shield-exclamation"></i> Hindari tanggal lahir, angka berulang (111111), atau berurutan (123456).</div>
+            </div>
+            <div class="card-app mb-3 soft">
+              <div class="small"><i class="bi bi-phone"></i> <span id="pwDevice">Perangkat ini</span></div>
+              <label class="check-row mt-2"><input type="checkbox" id="pwLogoutOthers" checked> <span><strong>Keluarkan sesi dari seluruh perangkat lain</strong><br><span class="tiny text-muted-2">Direkomendasikan setelah akun dipulihkan atau dibekukan.</span></span></label>
+            </div>
+            <div id="pwErr" class="field-error mb-2" role="alert" aria-live="assertive"></div>
+            <button class="btn btn-primary-app w-100 btn-lg" id="pwSubmit" type="submit"><i class="bi bi-shield-lock"></i> <span>Simpan & Masuk ke Portal</span></button>
+          </form>
+          <div id="pwSuccess" hidden></div>
+        </div>
+      </section>
+
+      <!-- W-14 PENGATURAN -->
+      <section id="section-pengaturan" class="content-section" data-title="Pengaturan">
+        <div class="page-head"><div><p class="eyebrow"><span class="tag">W-14 // PENGATURAN</span> TANPA UBAH KODE</p><h1>Pengaturan Aplikasi</h1>
+          <p class="text-muted-2">Identitas yayasan, templat surel & WhatsApp, komponen gaji, dan parameter pengiriman. Rahasia sistem (ID spreadsheet/folder, kunci, token WhatsApp) tersimpan di Script Properties, bukan di sini.</p></div></div>
+        <form id="setForm" class="row g-3" novalidate></form>
+        <div class="sticky-actions"><button class="btn btn-primary-app ms-auto" data-action="saveSettings"><i class="bi bi-check2-circle"></i> Simpan Pengaturan</button></div>
+      </section>
+
+      <!-- BANTUAN (Pegawai) -->
+      <section id="section-bantuan" class="content-section" data-title="Bantuan & Akun">
+        <div class="narrow" id="helpBody"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Bottom nav (Pegawai, ponsel) -->
+  <nav id="bottomNav" class="bottom-nav" hidden aria-label="Navigasi bawah"></nav>
+</div>
+
+<!-- ═════════════ MODAL ═════════════ -->
+<div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div><p class="eyebrow mb-0">PRATINJAU ISI PESAN SLIP</p><h5 class="modal-title" id="msgModalTitle">Pratinjau Pesan</h5></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <div class="seg mb-3" role="tablist" aria-label="Kanal"><button type="button" role="tab" class="on" data-action="msgTab" data-id="email" aria-selected="true"><i class="bi bi-envelope"></i> Surel</button><button type="button" role="tab" data-action="msgTab" data-id="wa" aria-selected="false"><i class="bi bi-whatsapp"></i> WhatsApp</button></div>
+        <div id="msgEmail" role="tabpanel"></div>
+        <div id="msgWa" role="tabpanel" hidden></div>
+      </div>
+      <div class="modal-footer">
+        <span class="tiny text-muted-2 me-auto" id="msgMeta"></span>
+        <button type="button" class="btn btn-ghost" data-action="msgEditTpl"><i class="bi bi-pencil-square"></i> Ubah Templat</button>
+        <button type="button" class="btn btn-primary-app" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="slipModal" tabindex="-1" aria-labelledby="slipModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div><p class="eyebrow mb-0" id="slipModalEyebrow">W-13 // INSPEKSI DOKUMEN</p><h5 class="modal-title" id="slipModalTitle">Pratinjau Slip</h5></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body p-0 slip-stage"><div id="slipLoading" class="center-load"><span class="spinner-border text-success"></span><p>Menyiapkan dokumen…</p></div><iframe id="slipFrame" title="Pratinjau slip gaji" sandbox="allow-same-origin allow-modals"></iframe></div>
+      <div class="modal-footer">
+        <span class="tiny mono text-muted-2 me-auto" id="slipModalMeta"></span>
+        <button class="btn btn-ghost" data-action="printSlip"><i class="bi bi-printer"></i> Cetak</button>
+        <button class="btn btn-ghost" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i> Tutup</button>
+        <button class="btn btn-primary-app" data-action="downloadCurrentSlip"><i class="bi bi-file-earmark-arrow-down"></i> Unduh PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pinModal" tabindex="-1" aria-labelledby="pinTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content pin-sheet">
+      <div class="modal-body text-center">
+        <div class="pin-shield"><i class="bi bi-shield-lock"></i></div>
+        <h5 id="pinTitle" class="fw-bold mt-2">Masukkan PIN Dokumen</h5>
+        <p class="small text-muted-2" id="pinDesc">Diperlukan untuk mengunduh slip PDF.</p>
+        <div class="pin-dots" id="pinDots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div id="pinErr" class="field-error my-2" role="alert"></div>
+        <div class="keypad" id="keypad"></div>
+        <div class="d-flex justify-content-between mt-3 small"><button class="btn btn-link p-0" data-bs-dismiss="modal">Batal</button><button class="btn btn-link p-0" data-action="forgotPin">Lupa PIN?</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-sm-down">
+    <form class="modal-content" id="formModalForm" novalidate>
+      <div class="modal-header"><h5 class="modal-title" id="formModalTitle">Formulir</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+      <div class="modal-body" id="formModalBody"></div>
+      <div class="modal-footer"><div id="formModalErr" class="field-error me-auto"></div>
+        <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary-app" id="formModalSubmit">Simpan</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header"><div class="d-flex gap-3 align-items-center"><span class="confirm-icon" id="confirmIcon"><i class="bi bi-question-lg"></i></span><div><h5 class="modal-title" id="confirmTitle">Konfirmasi</h5><p class="small text-muted-2 mb-0" id="confirmSub"></p></div></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+      <div class="modal-body" id="confirmBody"></div>
+      <div class="modal-footer"><button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary-app" id="confirmOk">Ya, Lanjutkan</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
+
+<!-- Loading awal -->
+<div id="bootLoader" class="boot-loader"><div class="brand-mark lg pulse"><i class="bi bi-bank2"></i></div><p>Memuat Portal Slip Gaji…</p></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+<!-- Konfigurasi URL backend (WAJIB diisi) → koneksi fetch ke GAS → aplikasi -->
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
